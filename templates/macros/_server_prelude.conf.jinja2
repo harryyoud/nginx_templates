@@ -25,3 +25,10 @@
     server_name             {{ domain }};
     root                    {{ base_dir }}/public_html;
 {% endmacro %}
+
+{% macro server_prelude_local(domain, base_dir) %}
+    listen                  11322;
+    listen                  [::]:11322;
+    server_name             {{ domain }};
+    root                    {{ base_dir }}/public_html;
+{% endmacro %}

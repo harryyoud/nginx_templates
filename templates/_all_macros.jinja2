@@ -16,8 +16,9 @@
 
 
 {% from 'macros/_server_prelude.conf.jinja2' import
-    server_prelude_internal, server_prelude, server_prelude_ssl
+    server_prelude_local, server_prelude_internal, server_prelude, server_prelude_ssl
 %}
+{% set server_prelude_local = server_prelude_local %}
 {% set server_prelude_internal = server_prelude_internal %}
 {% set server_prelude = server_prelude %}
 {% set server_prelude_ssl = server_prelude_ssl %}
@@ -27,9 +28,3 @@
     ssl_step_prelude
 %}
 {% set ssl_step_prelude = ssl_step_prelude %}
-
-
-{#{% from 'macros/_internal_server_block.conf.jinja2' import#}
-{#    internal_server_block#}
-{#%}#}
-{#{% set internal_server_block = internal_server_block %}#}
