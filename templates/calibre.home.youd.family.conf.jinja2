@@ -3,6 +3,7 @@
 {%- set basename = 'calibre' -%}
 {%- set domain = basename ~ '.home.youd.family' -%}
 {%- set base_dir = '/var/www/' ~ domain -%}
+{%- set proxy_pass = '127.0.0.1:8080' -%}
 {%- set skip_hsts = true -%}
 
 server {
