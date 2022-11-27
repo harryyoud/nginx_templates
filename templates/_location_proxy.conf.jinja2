@@ -1,0 +1,35 @@
+{% macro location_proxy_sso(location_string, proxy_url, allowed_group) %}
+    location {{ location_string }} {
+        proxy_pass {{ proxy_url }};
+        proxy_set_header Host $host;
+        proxy_read_timeout 300;
+        proxy_connect_timeout 300;
+        proxy_send_timeout 300;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        auth_request /internal-auth/oauth2/auth?allowed_groups={{ allowed_group }};
+        error_page 401 = https://sso.youd.family/oauth2/start?rd=$scheme%3A%2F%2F$host$request_uri;
+    }
+{% endmacro %}
+
+
+{% macro location_proxy(location_string, proxy_url) %}
+    location {{ location_string }} {
+        proxy_pass {{ proxy_url }};
+        proxy_set_header Host $host;
+        proxy_read_timeout 300;
+        proxy_connect_timeout 300;
+        proxy_send_timeout 300;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+{% endmacro %}
+
+
+{% macro location_redirect_https() %}
+    location / {
+        return 301 https://$host$request_uri;
+    }
+{% endmacro %}

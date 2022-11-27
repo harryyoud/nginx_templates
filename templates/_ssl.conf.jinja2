@@ -1,0 +1,4 @@
+{% macro ssl_step_prelude(domain) %}
+    ssl_certificate         /etc/step/certs/{{ domain }}/{{ domain }}.crt;
+    ssl_certificate_key     /etc/step/certs/{{ domain }}/{{ domain }}.key;
+{% endmacro %}

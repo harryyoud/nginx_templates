@@ -1,0 +1,26 @@
+{%- from '_location_proxy.conf.jinja2' import location_proxy_sso, location_proxy, location_redirect_https -%}
+{%- from '_server_prelude_ssl.conf.jinja2' import server_prelude_ssl, server_prelude -%}
+{%- from '_security.conf.jinja2' import security_internal_ips, security_headers, security_deny_dot -%}
+{%- from '_ssl.conf.jinja2' import ssl_step_prelude -%}
+
+{%- set domain = 'radarr.home.youd.family' -%}
+{%- set base_dir = '/var/www/radarr.home.youd.family' -%}
+{%- set proxy_pass = 'http://127.0.0.1:7878' -%}
+{%- set sso_group = "Radarr" -%}
+
+server {
+{{ server_prelude_ssl(domain, base_dir) }}
+{{ ssl_step_prelude(domain) }}
+{{ security_headers("'unsafe-inline'") }}
+{{ security_internal_ips() }}
+{{ security_deny_dot() }}
+{{ location_proxy_sso('/', proxy_pass, sso_group) }}
+{{ location_proxy_sso('~ ^/(api|feed)', proxy_pass, sso_group) }}
+}
+
+server {
+{{ server_prelude(domain, base_dir) }}
+{{ security_internal_ips() }}
+{{ security_deny_dot() }}
+{{ location_redirect_https() }}
+}
