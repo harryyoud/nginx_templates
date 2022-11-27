@@ -5,6 +5,7 @@
 {%- set base_dir = '/var/www/' ~ domain -%}
 {%- set proxy_pass = 'http://127.0.0.1:7878' -%}
 {%- set sso_group = "Radarr" -%}
+{%- set csp_extra = "'unsafe-inline'" -%}
 
 {% block location_block_https %}
     {{ m.location_proxy_sso('/', proxy_pass, sso_group) }}

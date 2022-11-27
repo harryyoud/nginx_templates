@@ -5,6 +5,7 @@
 {%- set base_dir = '/var/www/' ~ domain -%}
 {%- set proxy_pass = 'http://127.0.0.1:34400' -%}
 {%- set sso_group = "xTeVe" -%}
+{%- set csp_extra = "'unsafe-inline'" -%}
 
 {% block location_block_https %}
     {{ m.location_proxy('= /', proxy_pass) }}

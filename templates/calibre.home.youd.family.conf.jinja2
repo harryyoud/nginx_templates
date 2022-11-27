@@ -4,6 +4,7 @@
 {%- set domain = basename ~ '.home.youd.family' -%}
 {%- set base_dir = '/var/www/' ~ domain -%}
 {%- set proxy_pass = 'http://127.0.0.1:8080' -%}
+{%- set csp_extra = "'unsafe-inline'" -%}
 {%- set skip_hsts = true -%}
 
 server {
