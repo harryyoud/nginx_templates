@@ -10,7 +10,7 @@ server {
 {{ m.server_prelude_internal(basename ~ "-internal.trenzalore.home.youd.family", base_dir) }}
 {{ m.security_internal_ips() }}
     ssl_verify_client on;
-    ssl_trusted_certificate /etc/ssl/certs/Youd_CA_Root_CA.pem
+    ssl_trusted_certificate /etc/ssl/certs/Youd_CA_Root_CA.pem;
 {{ m.security_deny_dot() }}
 {{ m.security_headers(csp_extra, true) }}
 {{ m.location_proxy('/', proxy_pass) }}
