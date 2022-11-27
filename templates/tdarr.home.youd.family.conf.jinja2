@@ -1,25 +1,15 @@
-{%- from '_location_proxy.conf.jinja2' import location_proxy_sso, location_proxy, location_redirect_https -%}
-{%- from '_server_prelude_ssl.conf.jinja2' import server_prelude_ssl, server_prelude -%}
-{%- from '_security.conf.jinja2' import security_internal_ips, security_headers, security_deny_dot -%}
-{%- from '_ssl.conf.jinja2' import ssl_step_prelude -%}
+{%- extends '_basic.conf.jinja2' -%}
 
-{%- set domain = 'tdarr.home.youd.family' -%}
-{%- set base_dir = '/var/www/tdarr.home.youd.family' -%}
+{%- set basename = 'tdarr' -%}
+{%- set domain = basename ~ '.home.youd.family' -%}
+{%- set base_dir = '/var/www/' ~ domain -%}
 {%- set proxy_pass = 'http://127.0.0.1:8265' -%}
 {%- set sso_group = "Tdarr" -%}
 
-server {
-{{ server_prelude_ssl(domain, base_dir) }}
-{{ ssl_step_prelude(domain) }}
-{{ security_headers("'unsafe-inline'") }}
-{{ security_internal_ips() }}
-{{ security_deny_dot() }}
-{{ location_proxy_sso('/', proxy_pass, sso_group) }}
-}
+{% block location_block_https %}
+    {{ m.location_proxy_sso('/', proxy_pass, sso_group) }}
+{% endblock %}
 
-server {
-{{ server_prelude(domain, base_dir) }}
-{{ security_internal_ips() }}
-{{ security_deny_dot() }}
-{{ location_redirect_https() }}
-}
+{% block extras %}
+    {% include('_internal_server_block.conf.jinja2') %}
+{% endblock %}

@@ -1,0 +1,7 @@
+server {
+{{ m.server_prelude_internal(basename ~ "-internal.trenzalore.home.youd.family", base_dir) }}
+{{ m.security_internal_ips() }}
+{{ m.security_deny_dot() }}
+{{ m.security_headers(csp_extra, true) }}
+{{ m.location_proxy('/', proxy_pass) }}
+}

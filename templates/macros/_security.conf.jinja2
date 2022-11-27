@@ -16,6 +16,13 @@
 {% endmacro %}
 
 
+{% macro security_localhost_ips() %}
+    allow ::1;
+    allow 127.0.0.1;
+    deny all;
+{% endmacro %}
+
+
 {% macro security_deny_dot() %}
     location ~ /\.(?!well-known) {
         deny all;

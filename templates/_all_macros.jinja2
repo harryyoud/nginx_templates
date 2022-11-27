@@ -1,0 +1,35 @@
+{% from 'macros/_location_proxy.conf.jinja2' import
+    location_redirect_https, location_proxy, location_proxy_sso
+%}
+{% set location_redirect_https = location_redirect_https %}
+{% set location_proxy = location_proxy %}
+{% set location_proxy_sso = location_proxy_sso %}
+
+
+{% from 'macros/_security.conf.jinja2' import
+    security_internal_ips, security_localhost_ips, security_deny_dot, security_headers
+%}
+{% set security_internal_ips = security_internal_ips %}
+{% set security_localhost_ips = security_localhost_ips %}
+{% set security_deny_dot = security_deny_dot %}
+{% set security_headers = security_headers %}
+
+
+{% from 'macros/_server_prelude.conf.jinja2' import
+    server_prelude_internal, server_prelude, server_prelude_ssl
+%}
+{% set server_prelude_internal = server_prelude_internal %}
+{% set server_prelude = server_prelude %}
+{% set server_prelude_ssl = server_prelude_ssl %}
+
+
+{% from 'macros/_ssl.conf.jinja2' import
+    ssl_step_prelude
+%}
+{% set ssl_step_prelude = ssl_step_prelude %}
+
+
+{#{% from 'macros/_internal_server_block.conf.jinja2' import#}
+{#    internal_server_block#}
+{#%}#}
+{#{% set internal_server_block = internal_server_block %}#}

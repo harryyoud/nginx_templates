@@ -1,9 +1,4 @@
-{%- extends '_basic.conf.jinja2' -%}
-
-{%- set basename = 'ca' -%}
-{%- set domain = basename ~ '.home.youd.family' -%}
-{%- set base_dir = '/var/www/' ~ domain -%}
-{%- set skip_hsts = true -%}
+{%- import '_all_macros.jinja2' as m -%}
 
 server {
 {{ m.server_prelude_ssl(domain, base_dir) }}
@@ -11,10 +6,14 @@ server {
 {{ m.security_headers(csp_extra, skip_hsts) }}
 {{ m.security_internal_ips() }}
 {{ m.security_deny_dot() }}
+{% block location_block_https %}{% endblock %}
 }
 
 server {
 {{ m.server_prelude(domain, base_dir) }}
 {{ m.security_internal_ips() }}
 {{ m.security_deny_dot() }}
+{{ m.location_redirect_https() }}
 }
+
+{% block extras %}{% endblock %}

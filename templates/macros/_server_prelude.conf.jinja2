@@ -18,3 +18,10 @@
     server_name             {{ domain }};
     root                    {{ base_dir }}/public_html;
 {% endmacro %}
+
+{% macro server_prelude_internal(domain, base_dir) %}
+    listen                  127.0.0.1:11321;
+    listen                  [::1]:11321;
+    server_name             {{ domain }};
+    root                    {{ base_dir }}/public_html;
+{% endmacro %}
