@@ -1,14 +1,8 @@
 server {
-{{ m.server_prelude_local(basename ~ "-local.trenzalore.home.youd.family", base_dir) }}
-{{ m.security_localhost_ips() }}
-{{ m.security_deny_dot() }}
-{{ m.security_headers(csp_extra, true) }}
-{{ m.location_proxy('/', proxy_pass) }}
-}
-
-server {
 {{ m.server_prelude_internal(basename ~ "-internal.trenzalore.home.youd.family", base_dir) }}
 {{ m.security_internal_ips() }}
+    ssl_certificate         /etc/step/certs/trenzalore.home.youd.family/trenzalore.home.youd.family.crt;
+    ssl_certificate_key     /etc/step/certs/trenzalore.home.youd.family/trenzalore.home.youd.family.key;
     ssl_verify_client on;
     ssl_trusted_certificate /etc/ssl/certs/Youd_CA_Root_CA.pem;
 {{ m.security_deny_dot() }}
