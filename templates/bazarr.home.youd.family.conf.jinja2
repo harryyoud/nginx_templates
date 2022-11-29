@@ -9,7 +9,7 @@
 
 {% block location_block_https %}
     {{ m.location_proxy_sso('/', proxy_pass, sso_group) }}
-    {{ m.location_proxy('/api', proxy_pass, sso_group) }}
+    {{ m.location_proxy('/api', proxy_pass) }}
 {% endblock %}
 
 {% block extras %}
